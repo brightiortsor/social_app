@@ -7,7 +7,10 @@ import {
   InputBase,
   Badge,
   Avatar,
+  Menu,
+  MenuItem,
 } from "@mui/material";
+import { useState } from "react";
 
 const StyledToolbar = styled(Toolbar)({
   display: "flex",
@@ -22,13 +25,27 @@ const Search = styled("div")(({ theme }) => ({
 }));
 
 const Icons = styled("div")(({ theme }) => ({
-  display: "flex",
+  display: "none",
   alignItems: "center",
   justifyContent: "space-between",
-  gap: "10px",
+  gap: "20px",
+  [theme.breakpoints.up("sm")]: {
+    display: "flex",
+  },
+}));
+
+const UserBox = styled("Box")(({ theme }) => ({
+  display: "none",
+  alignItems: "center",
+  justifyContent: "space-between",
+  gap: "5px",
+  [theme.breakpoints.down("sm")]: {
+    display: "flex",
+  },
 }));
 
 const Navbar = () => {
+  const [open, setOpen] = useState(false);
   return (
     <AppBar position="sticky">
       <StyledToolbar>
@@ -47,11 +64,39 @@ const Navbar = () => {
             <Notifications />
           </Badge>
           <Avatar
+            onClick={() => setOpen(true)}
             sx={{ width: 30, height: 30 }}
             src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGVvcGxlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=700&q=60"
           />
         </Icons>
+
+        <UserBox onClick={() => setOpen(true)}>
+          <Avatar
+            sx={{ width: 30, height: 30 }}
+            src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGVvcGxlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=700&q=60"
+          />
+          <Typography variant="p">Theresa</Typography>
+        </UserBox>
       </StyledToolbar>
+
+      <Menu
+        id="demo-positioned-menu"
+        aria-labelledby="demo-positioned-button"
+        open={open}
+        onClose={() => setOpen(false)}
+        anchorOrigin={{
+          vertical: "top",
+          horizontal: "right",
+        }}
+        transformOrigin={{
+          vertical: "top",
+          horizontal: "right",
+        }}
+      >
+        <MenuItem>Profile</MenuItem>
+        <MenuItem>My account</MenuItem>
+        <MenuItem>Logout</MenuItem>
+      </Menu>
     </AppBar>
   );
 };
