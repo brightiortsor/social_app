@@ -14,7 +14,7 @@ import {
 const Post = () => {
   return (
     <div>
-      <Card>
+      <Card sx={{ margin: 5 }}>
         <CardHeader
           avatar={
             <Avatar
@@ -28,7 +28,7 @@ const Post = () => {
               <MoreVert />
             </IconButton>
           }
-          title="Àmàlà and ewédú"
+          title="Amanda Peters"
           subheader="January 11, 2023"
         />
         <CardMedia
